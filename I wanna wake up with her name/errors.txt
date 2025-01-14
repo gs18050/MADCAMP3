@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/screens.rpy", line 727: keyword argument 'style' appears more than once in a input statement.
+    style "centered_input"
+         ^
+
+Ren'Py Version: Ren'Py 8.3.4.24120703
+Tue Jan 14 20:33:06 2025
