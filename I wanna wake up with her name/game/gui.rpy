@@ -237,8 +237,8 @@ define config.thumbnail_width = 384
 define config.thumbnail_height = 216
 
 ## The number of columns and rows in the grid of save slots.
-define gui.file_slot_cols = 1
-define gui.file_slot_rows = 6
+define gui.file_slot_cols = 2
+define gui.file_slot_rows = 3
 
 
 ## Positioning and Spacing #####################################################
@@ -463,8 +463,8 @@ init python:
         gui.quick_button_text_size = 40
 
         ## File button layout.
-        gui.file_slot_cols = 1
-        gui.file_slot_rows = 6
+        gui.file_slot_cols = 2
+        gui.file_slot_rows = 3
 
         ## NVL-mode.
         gui.nvl_height = 173

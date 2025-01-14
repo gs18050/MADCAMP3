@@ -416,7 +416,7 @@ screen start_screen():
     frame:
         style "start_screen"
         xalign 0.5
-        yalign 0.5
+        yalign 0.45
 
         vbox:
             spacing 20
@@ -673,38 +673,47 @@ screen file_slots(title):
         style "file_slots_frame"
 
         vbox:
-            spacing 20
+            spacing 160
             xalign 0.5
-            yalign 0.1
+            yalign 0.33
 
-            if title=="Save":
+            if title == "Save":
                 text "저장하기" style "file_slots_title"
-            elif title=="Load":
+            elif title == "Load":
                 text "불러오기" style "file_slots_title"
 
-            for i in range(gui.file_slot_rows):
-                $ slot = i+1
+            # 그리드로 슬롯 배치
+            grid gui.file_slot_cols gui.file_slot_rows spacing 160:
+                for i in range(gui.file_slot_rows * gui.file_slot_cols):
+                    $ slot = i + 1
 
-                button:
-                    if title == _("Load"):
-                        if renpy.can_load(str(slot)):
-                            action Function(renpy.load, str(slot))
+                    button:
+                        if title == "Load":
+                            if renpy.can_load(str(slot)):
+                                action Function(renpy.load, str(slot))
+                            else:
+                                action None
                         else:
-                            action None
-
-                    else:
-                        action [SetVariable("save_slot", slot),
+                            action [
+                                SetVariable("save_slot", slot),
                                 SetVariable("save_name", ""),
-                                Show("save_name_input")]
+                                Show("save_name_input")
+                            ]
 
-                    has hbox
+                        has vbox
 
-                    add Transform(Image("gui/save_bg.png",xalign=0,yalign=0.5),zoom=0.1)
+                        # 이미지 추가
+                        if slot in persistent.save_names:
+                            add Transform(Image("gui/save_bg.png", xalign=0.5, yalign=0.5), zoom=0.4)
+                        else:
+                            add Transform(Image("gui/empty_save.png", xalign=0.5, yalign=0.5), zoom=0.4)
 
-                    text persistent.save_names.get(slot, _("빈 슬롯")):
-                        style "slot_name_text"
+                        # 텍스트 추가
+                        text persistent.save_names.get(slot, _("빈 슬롯")):
+                            style "slot_name_text"
 
             textbutton _("돌아가기"):
+                style "return_button"
                 action Return()
 
 screen save_name_input():
@@ -744,8 +753,17 @@ style slot_button is gui_button
 style slot_button_text is gui_button_text
 style slot_time_text is slot_button_text
 
+style return_button:
+    xalign 0.5
+    background Solid("#000000")
+
+style return_button_text:
+    color "#FFFFFF"
+    hover_color "#636363"
+
 style slot_name_text:
     textalign 0.5
+    xalign 0.5
     color "#ffffff"
 
 style file_slots_frame:
