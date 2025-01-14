@@ -163,13 +163,78 @@ init python:
         else:
             return love.index(max_love)
 
+screen react_screen(react_function):
+    button:
+        background None
+        action [
+            Function(react_function),
+            Hide("react_screen"),
+            Return(True)
+        ]
+
 label eye_game:
-    #what?
+    $ results = []
+    $ rounds = 5
+    $ flag = False
+
+    show Sungjae1
+    $ current_character = "Sungjae"
+    system "야생의 조성제가 눈웃음을 시전했다!"
+    system "눈웃음을 보고 빠르게 반응하지 못하면 매혹되고 말거야!"
+
+    python:
+        import random
+        import time
+
+        def react():
+            if not timer_reacted[0]:
+                timer_reacted[0] = True
+                reaction_time = time.time() - start_time
+                results.append(reaction_time)
+                renpy.hide("Sungjae2")
+                renpy.show("Sungjae1")
+
+        for i in range(rounds):
+            if flag:
+                break
+
+            wait_time = random.uniform(2, 5)
+            renpy.pause(wait_time)
+
+            renpy.hide("Sungjae1")
+            renpy.show("Sungjae2")
+
+            start_time = time.time()
+            timer_reacted = [False]
+
+            renpy.call_screen("react_screen", react_function=react)
+
+            if results[-1]>0.7:
+                flag=True
+
+    hide Sungjae1
+
+    if flag:
+        show Sungjae4
+        system "효과는 굉장했다!"
+        system "모든 호감도가 0으로 돌아갑니다."
+        $ love_Geonhee = 0
+        $ love_Heeseol = 0
+        $ love_Yeha = 0
+        hide Sungjae4
+    else:
+        show Sungjae3
+        system "효과는 별로였다.."
+        system "호감도를 성공적으로 지켜냈습니다."
+        hide Sungjae3
+
+    jump scene2
 
 label start:
 
     scene campus with fade
-
+    python:
+        renpy.log("디버깅 테스트: 로그 출력 확인")
     show JunHo1
     $ current_character = "JunHo"
     JunHo "안녕? 난 박준호, 23세."
@@ -276,8 +341,9 @@ label scene1:
     Sungjae "그리고… 제 눈웃음 보셨죠? 저한테 \n빠져들지 마세요, 너무 매력적이니까요."
     hide Sungjae2
 
-    #mini game?
+    jump eye_game
 
+label scene2:
     show JunHo1
     $ current_character = "JunHo"
     JunHo "안녕하세요, 저는 박준호라고 합니다."

@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 727: keyword argument 'style' appears more than once in a input statement.
-    style "centered_input"
-         ^
+File "game/script.rpy", line 238: python block expects a non-empty block.
+    python:
+           ^
+
+File "game/script.rpy", line 239: expected statement.
+    renpy.log("디버깅 테스트: 로그 출력 확인")
+                                  ^
 
 Ren'Py Version: Ren'Py 8.3.4.24120703
-Tue Jan 14 20:33:06 2025
+Tue Jan 14 23:00:16 2025
