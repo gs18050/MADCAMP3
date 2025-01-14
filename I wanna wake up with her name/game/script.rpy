@@ -17,6 +17,7 @@ image mansroom_night = "images/mansroom_night.png"
 image sports_field = "images/sports_field.png"
 image sports_field_evening = "images/sports_field_evening.png"
 image bar = "images/bar.png"
+image marriage = "images/marriage.png"
 
 image JunHo1 = "JunHo1.png"
 image JunHo2 = "JunHo2.png"
@@ -29,19 +30,23 @@ image JunHo7 = "JunHo7.png"
 image Geonhee = "Geonhee.png"
 image Geonhee_happy = "Geonhee_happy.png"
 image Geonhee_unhappy = "Geonhee_unhappy.png"
+image Geonhee_ending = "Geonhee_ending.png"
 
 image Heeseol = "Heeseol.png"
 image Heeseol_happy = "Heeseol_happy.png"
 image Heeseol_unhappy = "Heeseol_unhappy.png"
+image Heeseol_ending = "Heeseol_ending.png"
 
 image Yeha = "Yeha.png"
 image Yeha_happy = "Yeha_happy.png"
 image Yeha_unhappy = "Yeha_unhappy.png"
+image Yeha_ending = "Yeha_ending.png"
 
 image Sungjae1 = "Sungjae1.png"
 image Sungjae2 = "Sungjae2.png"
 image Sungjae3 = "Sungjae3.png"
 image Sungjae4 = "Sungjae4.png"
+image bad_ending = "bad_ending.png"
 
 default love_Geonhee = 0
 default love_Heeseol = 0
@@ -181,6 +186,8 @@ label eye_game:
     $ current_character = "Sungjae"
     system "야생의 조성제가 눈웃음을 시전했다!"
     system "눈웃음을 보고 빠르게 반응하지 못하면 매혹되고 말거야!"
+    hide Sungjae1
+    show Sungjae1
 
     python:
         import random
@@ -216,7 +223,7 @@ label eye_game:
 
     if flag:
         show Sungjae4
-        system "효과는 굉장했다!"
+        Sungjae "하하, 내 눈웃음에 완전 빠져버렸네?"
         system "모든 호감도가 0으로 돌아갑니다."
         $ love_Geonhee = 0
         $ love_Heeseol = 0
@@ -224,8 +231,7 @@ label eye_game:
         hide Sungjae4
     else:
         show Sungjae3
-        system "효과는 별로였다.."
-        system "호감도를 성공적으로 지켜냈습니다."
+        Sungjae "내 눈웃음을 막아낸건 너가 처음이야!"
         hide Sungjae3
 
     jump scene2
@@ -849,16 +855,17 @@ label epilogue:
     hide JunHo2
 
     $ ending = choose_ending(love_Geonhee,love_Heeseol,love_Yeha)
+    scene marriage
 
     if ending == 0:
-        show Geonhee_happy #Geonhee_ending
+        show Geonhee_ending
         Geonhee "준호 씨, 평생을 함께하며, 서로의 소중함을 느끼고 살아가고 싶어요."
     elif ending == 1:
-        show Heeseol_happy #Heeseol_ending
+        show Heeseol_ending
         Heeseol "오빠, 처음 만났을 때부터 항상 따뜻하게 대해줘서, 제 옆에 있어줘서 고마워요."
     elif ending == 2:
-        show Yeha_happy #Yeha_ending
+        show Yeha_ending
         Yeha "준호야, 이렇게 멋진 날, 함께할 수 있다는 게 정말 행복해!"
     else:
-        show Sungjae2 #bad_ending
+        show bad_ending
         Sungjae "이렇게 멋진 결정을 해줘서 너무 고마워. 내 눈웃음을 평생 선물할게."
