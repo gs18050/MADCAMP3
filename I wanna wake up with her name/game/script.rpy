@@ -660,7 +660,7 @@ label sports_day:
     scene sports_field with fade
     show Sungjae4
     $ current_character = "Sungjae"
-    Sungjae "자, 오늘 체육대회는 여러분의 체력과 함께\n운명도 시험해볼 기회!"
+    Sungjae "자, 오늘 체육대회는 여러분의 체력과\n함께 운명도 시험해볼 기회!"
     Sungjae "같은 종목을 고른 사람과 데이트로 \n이어질 수 있답니다!"
     hide Sungjae4
     show Sungjae2
