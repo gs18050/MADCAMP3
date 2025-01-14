@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 238: python block expects a non-empty block.
-    python:
-           ^
-
-File "game/script.rpy", line 239: expected statement.
-    renpy.log("디버깅 테스트: 로그 출력 확인")
-                                  ^
+File "game/screens.rpy", line 790: expected 'simple_expression' not found.
+    xalign=0.5
+          ^
 
 Ren'Py Version: Ren'Py 8.3.4.24120703
-Tue Jan 14 23:00:16 2025
+Wed Jan 15 04:04:27 2025

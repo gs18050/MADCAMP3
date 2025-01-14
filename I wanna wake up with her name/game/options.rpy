@@ -20,7 +20,6 @@ define config.name = _("I wanna wake up with her name")
 
 define gui.show_name = True
 
-
 ## The version of the game.
 
 define config.version = "1.0"

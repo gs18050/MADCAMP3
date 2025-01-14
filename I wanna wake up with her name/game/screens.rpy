@@ -677,10 +677,10 @@ screen file_slots(title):
             xalign 0.5
             yalign 0.33
 
-            if title == "Save":
-                text "저장하기" style "file_slots_title"
-            elif title == "Load":
-                text "불러오기" style "file_slots_title"
+            if title=="Load":
+                text "불러오기" style "file_slots_title" xalign 0.5 yalign 0.5
+            else:
+                text "저장하기" style "file_slots_title" xalign 0.5 yalign 0.5
 
             # 그리드로 슬롯 배치
             grid gui.file_slot_cols gui.file_slot_rows spacing 160:
@@ -755,7 +755,7 @@ style slot_time_text is slot_button_text
 
 style return_button:
     xalign 0.5
-    background Solid("#000000")
+    background None #Solid("#000000")
 
 style return_button_text:
     color "#FFFFFF"
@@ -783,6 +783,7 @@ style save_name_input:
 style file_slots_title:
     textalign 0.5
     xalign 0.5
+    size 60
 
 style page_label:
     xpadding 75

@@ -46,6 +46,7 @@ image Sungjae1 = "Sungjae1.png"
 image Sungjae2 = "Sungjae2.png"
 image Sungjae3 = "Sungjae3.png"
 image Sungjae4 = "Sungjae4.png"
+image Sungjae5 = "Sungjae5.png"
 image bad_ending = "bad_ending.png"
 
 default love_Geonhee = 0
@@ -182,11 +183,11 @@ label eye_game:
     $ rounds = 5
     $ flag = False
 
-    show Sungjae1
+    show Sungjae5
     $ current_character = "Sungjae"
     system "야생의 조성제가 눈웃음을 시전했다!"
     system "눈웃음을 보고 빠르게 반응하지 못하면 매혹되고 말거야!"
-    hide Sungjae1
+    hide Sungjae5
     show Sungjae1
 
     python:
@@ -205,7 +206,7 @@ label eye_game:
             if flag:
                 break
 
-            wait_time = random.uniform(2, 5)
+            wait_time = random.uniform(0.5, 3)
             renpy.pause(wait_time)
 
             renpy.hide("Sungjae1")
@@ -216,7 +217,7 @@ label eye_game:
 
             renpy.call_screen("react_screen", react_function=react)
 
-            if results[-1]>0.7:
+            if results[-1]>0.5:
                 flag=True
 
     hide Sungjae1
