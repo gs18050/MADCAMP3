@@ -20,6 +20,7 @@ image bar = "images/bar.png"
 image marriage = "images/marriage.png"
 image shuffle_game = "images/shuffle_game.png"
 image preending = "images/preending.png"
+image envelope = Transform(Image("images/envelope.png",xpos=580,yalign=0.3),zoom=0.8)
 
 image JunHo1 = "JunHo1.png"
 image JunHo2 = "JunHo2.png"
@@ -368,7 +369,11 @@ label start:
     JunHo "이런 내가 못가진 게 있다면 딱 하나 ,,, 첫사랑"
     JunHo "맞아. 아직까지 내 심장을 뛰게 만든\n여자를 찾지 못했어!"
     JunHo "그런데 말이야, 운명의 장난처럼 내 앞에 사랑의 기회가 떨어졌다고?"
+    hide JunHo4
+    show envelope
     JunHo "{i}몰입캠프에 참가하시겠습니까?{/i}"
+    hide envelope
+    show JunHo4
     JunHo "혼자 들어가면 반드시 둘이 되어\n나온다는, 그 사랑의 몰입캠프?!"
     hide JunHo4
     show JunHo6
