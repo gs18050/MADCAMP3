@@ -19,6 +19,7 @@ image sports_field_evening = "images/sports_field_evening.png"
 image bar = "images/bar.png"
 image marriage = "images/marriage.png"
 image shuffle_game = "images/shuffle_game.png"
+image preending = "images/preending.png"
 
 image JunHo1 = "JunHo1.png"
 image JunHo2 = "JunHo2.png"
@@ -980,6 +981,41 @@ label epilogue:
     hide JunHo2
 
     $ ending = choose_ending(love_Geonhee,love_Heeseol,love_Yeha)
+
+    scene preending
+
+    screen center_text(message):
+        frame:
+            xalign 0.5
+            yalign 0.35
+            background None
+            xsize 800
+            ysize 200
+
+            text "[message]":
+                size 50
+                color "#000000"
+                xalign 0.5
+                yalign 0.5
+
+    # 텍스트 표시
+    show screen center_text("두근두근\n준호의 첫사랑을 만나기 하루 전 ...\n\n준호는 누구의 이름으로\n하루를 시작하게 될까")
+
+    python:
+        # 타이머와 셀 갱신
+        start_time = renpy.display.core.get_time()
+        while True:
+            elapsed_time = renpy.display.core.get_time() - start_time
+
+            # 게임 시간이 종료되면 탈출
+            if elapsed_time >= 3:
+                break
+
+            renpy.restart_interaction()
+            renpy.pause(1)
+    
+    hide screen center_text
+
     scene marriage
 
     if ending == 0:
