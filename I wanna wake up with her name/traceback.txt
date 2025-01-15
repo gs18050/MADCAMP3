@@ -1,26 +1,80 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 282, in script
-    python:
-  File "game/script.rpy", line 303, in <module>
-    start_time = renpy.get_time()
-AttributeError: module 'renpy.exports' has no attribute 'get_time'
+After initialization, but before game start.
+  File "game/script.rpy", line 199, in prepare_screen
+    screen mole_game():
+  File "game/script.rpy", line 199, in prepare
+    screen mole_game():
+  File "game/script.rpy", line 203, in prepare
+    frame:
+  File "game/script.rpy", line 203, in prepare
+    frame:
+  File "game/script.rpy", line 210, in prepare
+    grid 3 3 spacing 200:
+  File "game/script.rpy", line 210, in prepare
+    grid 3 3 spacing 200:
+  File "game/script.rpy", line 211, in prepare
+    for i in range(9):
+  File "game/script.rpy", line 211, in prepare
+    for i in range(9):
+  File "game/script.rpy", line 212, in prepare
+    button:
+  File "game/script.rpy", line 212, in prepare
+    button:
+  File "game/script.rpy", line 214, in prepare
+    if shown_cells[i] == "Sungmole1":
+  File "game/script.rpy", line 216, in prepare
+    elif shown_cells[i] == "Sungmole2":
+SyntaxError: positional argument follows keyword argument (game/script.rpy, line 217)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 282, in script
-    python:
-  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\ast.py", line 827, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\python.py", line 1178, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/script.rpy", line 303, in <module>
-    start_time = renpy.get_time()
-AttributeError: module 'renpy.exports' has no attribute 'get_time'
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\bootstrap.py", line 359, in bootstrap
+    renpy.main.main()
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\main.py", line 652, in main
+    run(restart)
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\main.py", line 94, in run
+    renpy.display.screen.prepare_screens()
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\display\screen.py", line 1024, in prepare_screens
+    s.ast.prepare_screen()
+  File "game/script.rpy", line 199, in prepare_screen
+    screen mole_game():
+  File "game/script.rpy", line 199, in prepare
+    screen mole_game():
+  File "game/script.rpy", line 203, in prepare
+    frame:
+  File "game/script.rpy", line 203, in prepare
+    frame:
+  File "game/script.rpy", line 210, in prepare
+    grid 3 3 spacing 200:
+  File "game/script.rpy", line 210, in prepare
+    grid 3 3 spacing 200:
+  File "game/script.rpy", line 211, in prepare
+    for i in range(9):
+  File "game/script.rpy", line 211, in prepare
+    for i in range(9):
+  File "game/script.rpy", line 212, in prepare
+    button:
+  File "game/script.rpy", line 212, in prepare
+    button:
+  File "game/script.rpy", line 214, in prepare
+    if shown_cells[i] == "Sungmole1":
+  File "game/script.rpy", line 216, in prepare
+    elif shown_cells[i] == "Sungmole2":
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\py3analysis.py", line 803, in ast_eval
+    return self.ast_eval_literal(expr)[0]
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\py3analysis.py", line 785, in ast_eval_literal
+    expr = py_compile(expr, 'eval', ast_node=True)
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\python.py", line 1144, in py_compile
+    raise e
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\python.py", line 1081, in py_compile
+    raise orig_e
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\python.py", line 1073, in py_compile
+    tree = compile(source, filename, py_mode, ast.PyCF_ONLY_AST | flags, 1)
+SyntaxError: positional argument follows keyword argument (game/script.rpy, line 217)
 
 Windows-10-10.0.22631 AMD64
 Ren'Py 8.3.4.24120703
 I wanna wake up with her name 1.0
-Wed Jan 15 15:47:04 2025
+Wed Jan 15 16:53:08 2025
