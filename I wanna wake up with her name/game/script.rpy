@@ -168,6 +168,90 @@ init python:
             return 404
         else:
             return love.index(max_love)
+    
+    def update_score(index):
+        global score
+        global shown_cells
+
+        # 클릭 시 점수 업데이트 및 셀 초기화
+        if shown_cells[index] == "Sungjae1":
+            score -= 10
+            shown_cells[index] = ""
+            renpy.restart_interaction()  # 화면 갱신
+        elif shown_cells[index] == "Sungjae2":
+            score += 10
+            shown_cells[index] = ""
+            renpy.restart_interaction()  # 화면 갱신
+
+label shuffle:
+
+    system "야생의 조성제가 술게임을 시전했다."
+    hide Sungjae5
+    
+    $ score = 0
+    $ game_time = 15.0  # 게임 총 시간 (초)
+    $ start_time = time.time()  # 게임 시작 시간
+
+    screen mole_game():
+        zorder 200
+        modal True  # 다른 입력 차단
+
+        # 배경 프레임
+        frame:
+            xalign 0.5
+            yalign 0.5
+            xsize 900
+            ysize 900
+            background Solid("#444444")
+
+            grid 3 3 spacing 0:
+                for i in range(9):
+                    button:
+                        action Function(update_score, i)
+                        if shown_cells[i] == "Sungjae1":
+                            background Transform(Image("images/Sungjae1.png",xalign=0.5,yalign=0.5),zoom=0.3)
+                        elif shown_cells[i] == "Sungjae2":
+                            background Transform(Image("images/Sungjae2.png",xalign=0.5,yalign=0.5),zoom=0.3)
+                        xsize 100
+                        ysize 100
+                        xalign 0.5
+                        yalign 0.5
+
+        # 남은 시간 및 점수 표시
+        vbox:
+            xalign 0.5
+            ypos 50
+
+            text "남은 시간: [int(game_time - (time.time() - start_time))]초" style "score_text"
+            text "점수: [score]" style "score_text"
+
+    # 게임 화면 실행
+    show screen mole_game()
+
+    # 셀 업데이트 타이머
+    python:
+        import random
+
+        shown_cells = [""] * 9
+        while int(time.time() - start_time) < int(game_time):
+            for i in range(9):
+                shown_cells[i] = random.choice(["Sungjae1", "Sungjae2", ""])
+
+            #renpy.restart_interaction()
+            renpy.pause(1)
+
+    hide screen mole_game
+
+    # 게임 결과 표시
+    system "게임 종료! 최종 점수: [score]점"
+
+    jump drunk
+
+style score_text:
+    size 40
+    color "#FFFFFF"
+    bold True
+    xalign 0.5
 
 screen react_screen(react_function):
     button:
@@ -177,6 +261,11 @@ screen react_screen(react_function):
             Hide("react_screen"),
             Return(True)
         ]
+
+init python:
+    # 게임에서 사용할 시작 시간 변수
+    import random
+    store.game_random = random.Random()
 
 label eye_game:
     $ results = []
@@ -192,12 +281,11 @@ label eye_game:
 
     python:
         import random
-        import time
 
         def react():
             if not timer_reacted[0]:
                 timer_reacted[0] = True
-                reaction_time = time.time() - start_time
+                reaction_time = renpy.display.core.get_time() - start_time
                 results.append(reaction_time)
                 renpy.hide("Sungjae2")
                 renpy.show("Sungjae1")
@@ -206,13 +294,13 @@ label eye_game:
             if flag:
                 break
 
-            wait_time = random.uniform(0.5, 3)
+            wait_time = store.game_random.uniform(0.5, 3)
             renpy.pause(wait_time)
 
             renpy.hide("Sungjae1")
             renpy.show("Sungjae2")
 
-            start_time = time.time()
+            start_time = renpy.display.core.get_time()
             timer_reacted = [False]
 
             renpy.call_screen("react_screen", react_function=react)
@@ -745,7 +833,16 @@ label drinking:
     $ current_character = "JunHo"
     JunHo "결국 자리가 없어서 여기를 왔네. \n다들 취한 것 같아..."
     hide JunHo4
+
+    show Sungjae5
+    $ current_character = "Sungjae"
+    Sungjae "술자리에서는 술게임을 해야겠죠?"
+    jump shuffle
+
+label drunk:
+
     show JunHo5
+    $ current_character = "JunHo"
     JunHo "그래도 오늘이 마지막이니까 모두와 \n대화를 해봐야겠어!"
     hide JunHo5
 

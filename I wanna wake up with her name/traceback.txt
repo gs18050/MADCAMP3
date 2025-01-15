@@ -1,28 +1,26 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/options.rpy", line 54, in script
-    define config.presplash_background_color = "#e670cc"
-  File "renpy/common/000namespaces.rpy", line 34, in set
-    setattr(self.nso, name, value)
-Exception: config.presplash_background_color is not a known configuration variable.
+  File "game/script.rpy", line 282, in script
+    python:
+  File "game/script.rpy", line 303, in <module>
+    start_time = renpy.get_time()
+AttributeError: module 'renpy.exports' has no attribute 'get_time'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/options.rpy", line 54, in script
-    define config.presplash_background_color = "#e670cc"
-  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\ast.py", line 2241, in execute
-    self.set()
-  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\ast.py", line 2259, in set
-    ns.set(self.varname, value)
-  File "renpy/common/000namespaces.rpy", line 34, in set
-    setattr(self.nso, name, value)
-  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\defaultstore.py", line 101, in __setattr__
-    raise Exception('config.%s is not a known configuration variable.' % (name))
-Exception: config.presplash_background_color is not a known configuration variable.
+  File "game/script.rpy", line 282, in script
+    python:
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\ast.py", line 827, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\Users\dodre\Downloads\renpy-8.3.4-sdk\renpy\python.py", line 1178, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/script.rpy", line 303, in <module>
+    start_time = renpy.get_time()
+AttributeError: module 'renpy.exports' has no attribute 'get_time'
 
 Windows-10-10.0.22631 AMD64
 Ren'Py 8.3.4.24120703
 I wanna wake up with her name 1.0
-Wed Jan 15 04:28:46 2025
+Wed Jan 15 15:47:04 2025
